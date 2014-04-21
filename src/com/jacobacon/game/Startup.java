@@ -52,7 +52,7 @@ public class Startup extends Canvas implements Runnable {
 		setPreferredSize(new Dimension(WIDTH * SCALE, HEIGHT * SCALE)); // minimum
 		// size.
 
-		frame = new JFrame("Game Alpha 0.0.1"); // Sets name of frame, and
+		frame = new JFrame("Game Alpha 0.0.2"); // Sets name of frame, and
 											// initializes it.
 
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -70,6 +70,10 @@ public class Startup extends Canvas implements Runnable {
 	private void tick() {
 		tickCount++;
 
+		for(int i = 0; i < pixels.length; i++){
+			pixels[i] = i * tickCount;
+		}
+		
 	}
 
 	private void render() {
@@ -81,8 +85,10 @@ public class Startup extends Canvas implements Runnable {
 
 		Graphics g = bs.getDrawGraphics();
 
-		g.setColor(Color.RED);
-		g.fillRect(0, 0, getWidth(), getHeight());
+		
+		
+		g.drawImage(image, 0, 0 , getWidth(), getHeight(), null);
+		
 		g.dispose();
 
 		bs.show();
