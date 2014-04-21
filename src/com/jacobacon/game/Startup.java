@@ -19,6 +19,9 @@ package com.jacobacon.game;
 import java.awt.BorderLayout;
 import java.awt.Canvas;
 import java.awt.Dimension;
+import java.awt.image.BufferStrategy;
+import java.awt.image.BufferedImage;
+import java.awt.image.DataBufferInt;
 
 import javax.swing.JFrame;
 
@@ -33,8 +36,12 @@ public class Startup extends Canvas implements Runnable {
 	public static final int SCALE = 3;
 
 	boolean running;
+	private int tickCount = 0;
 
 	private JFrame frame; // Frame
+	
+	private BufferedImage image = new BufferedImage(WIDTH, HEIGHT, BufferedImage.TYPE_INT_RGB);
+	private int[] pixels = ((DataBufferInt) image.getRaster().getDataBuffer()).getData();
 
 	public Startup() {
 		setMinimumSize(new Dimension(WIDTH * SCALE, HEIGHT * SCALE)); // Sets
@@ -57,12 +64,15 @@ public class Startup extends Canvas implements Runnable {
 	}
 
 	private void tick() {
-		// TODO Auto-generated method stub
+		tickCount++;
 
 	}
 
 	private void render() {
-		// TODO Auto-generated method stub
+		BufferStrategy bs = getBufferStrategy();
+		if(bs == null){
+			createBufferStrategy(3);
+		}
 
 	}
 
