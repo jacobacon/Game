@@ -6,7 +6,7 @@ package com.jacobacon.game;
  *  2) Calls start method.
  *  3) Calls run method.
  *  4) Calls tick method every loop.
- *  5)
+ *  5) 
  * 
  * 
  * 
@@ -18,7 +18,9 @@ package com.jacobacon.game;
 
 import java.awt.BorderLayout;
 import java.awt.Canvas;
+import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Graphics;
 import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
 import java.awt.image.DataBufferInt;
@@ -33,22 +35,24 @@ public class Startup extends Canvas implements Runnable {
 											// monitor.
 	public static final int HEIGHT = WIDTH / 12 * 9;
 
-	public static final int SCALE = 3;
+	public static final int SCALE = 6;
 
 	boolean running;
 	private int tickCount = 0;
 
 	private JFrame frame; // Frame
-	
-	private BufferedImage image = new BufferedImage(WIDTH, HEIGHT, BufferedImage.TYPE_INT_RGB);
-	private int[] pixels = ((DataBufferInt) image.getRaster().getDataBuffer()).getData();
+
+	private BufferedImage image = new BufferedImage(WIDTH, HEIGHT,
+			BufferedImage.TYPE_INT_RGB);
+	private int[] pixels = ((DataBufferInt) image.getRaster().getDataBuffer())
+			.getData();
 
 	public Startup() {
 		setMinimumSize(new Dimension(WIDTH * SCALE, HEIGHT * SCALE)); // Sets
 		setPreferredSize(new Dimension(WIDTH * SCALE, HEIGHT * SCALE)); // minimum
 		// size.
 
-		frame = new JFrame("Game Alpha 1"); // Sets name of frame, and
+		frame = new JFrame("Game Alpha 0.0.1"); // Sets name of frame, and
 											// initializes it.
 
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -70,9 +74,18 @@ public class Startup extends Canvas implements Runnable {
 
 	private void render() {
 		BufferStrategy bs = getBufferStrategy();
-		if(bs == null){
+		if (bs == null) {
 			createBufferStrategy(3);
+			return;
 		}
+
+		Graphics g = bs.getDrawGraphics();
+
+		g.setColor(Color.RED);
+		g.fillRect(0, 0, getWidth(), getHeight());
+		g.dispose();
+
+		bs.show();
 
 	}
 
