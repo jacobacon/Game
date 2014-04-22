@@ -18,9 +18,9 @@ package com.jacobacon.game;
 
 import java.awt.BorderLayout;
 import java.awt.Canvas;
-import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
+import java.awt.Toolkit;
 import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
 import java.awt.image.DataBufferInt;
@@ -31,11 +31,10 @@ public class Startup extends Canvas implements Runnable {
 
 	private static final long serialVersionUID = 1L;
 
-	public static final int WIDTH = 160; // TODO Get width * height from
-											// monitor.
-	public static final int HEIGHT = WIDTH / 12 * 9;
-
-	public static final int SCALE = 6;
+	static Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+	public static final int WIDTH = (int) screenSize.getWidth(); 
+	public static final int HEIGHT = (int) screenSize.getHeight();
+	public static final int SCALE = 2;
 
 	boolean running;
 	private int tickCount = 0;
@@ -48,12 +47,12 @@ public class Startup extends Canvas implements Runnable {
 			.getData();
 
 	public Startup() {
-		setMinimumSize(new Dimension(WIDTH * SCALE, HEIGHT * SCALE)); // Sets
-		setPreferredSize(new Dimension(WIDTH * SCALE, HEIGHT * SCALE)); // minimum
+		setMinimumSize(new Dimension(WIDTH / SCALE, HEIGHT / SCALE)); // Sets
+		setPreferredSize(new Dimension(WIDTH / SCALE, HEIGHT / SCALE)); // minimum
 		// size.
 
-		frame = new JFrame("Game Alpha 0.0.2"); // Sets name of frame, and
-											// initializes it.
+		frame = new JFrame("Game Alpha 0.0.3"); // Sets name of frame, and
+		// initializes it.
 
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setLayout(new BorderLayout());
@@ -70,10 +69,11 @@ public class Startup extends Canvas implements Runnable {
 	private void tick() {
 		tickCount++;
 
-		for(int i = 0; i < pixels.length; i++){
-			pixels[i] = i * tickCount;
-		}
-		
+		/*
+		 * for (int i = 0; i < pixels.length; i++) { pixels[i] = i * tickCount;
+		 * }
+		 */
+
 	}
 
 	private void render() {
@@ -85,10 +85,8 @@ public class Startup extends Canvas implements Runnable {
 
 		Graphics g = bs.getDrawGraphics();
 
-		
-		
-		g.drawImage(image, 0, 0 , getWidth(), getHeight(), null);
-		
+		g.drawImage(image, 0, 0, getWidth(), getHeight(), null);
+
 		g.dispose();
 
 		bs.show();
