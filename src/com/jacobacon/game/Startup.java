@@ -34,7 +34,7 @@ public class Startup extends Canvas implements Runnable {
 	static Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 	public static final int WIDTH = (int) screenSize.getWidth(); 
 	public static final int HEIGHT = (int) screenSize.getHeight();
-	public static final int SCALE = 2;
+	public static final double SCALE = 1.75;
 
 	boolean running;
 	private int tickCount = 0;
@@ -47,8 +47,8 @@ public class Startup extends Canvas implements Runnable {
 			.getData();
 
 	public Startup() {
-		setMinimumSize(new Dimension(WIDTH / SCALE, HEIGHT / SCALE)); // Sets
-		setPreferredSize(new Dimension(WIDTH / SCALE, HEIGHT / SCALE)); // minimum
+		setMinimumSize(new Dimension((int)(WIDTH / SCALE), (int)(HEIGHT / SCALE))); // Sets
+		setPreferredSize(new Dimension((int)(WIDTH / SCALE), (int)(HEIGHT / SCALE))); // minimum
 		// size.
 
 		frame = new JFrame("Game Alpha 0.0.3"); // Sets name of frame, and
