@@ -27,6 +27,8 @@ import java.awt.image.DataBufferInt;
 
 import javax.swing.JFrame;
 
+import com.jacobacon.game.gfx.SpriteSheet;
+
 public class Startup extends Canvas implements Runnable {
 
 	private static final long serialVersionUID = 1L;
@@ -43,8 +45,9 @@ public class Startup extends Canvas implements Runnable {
 
 	private BufferedImage image = new BufferedImage(WIDTH, HEIGHT,
 			BufferedImage.TYPE_INT_RGB);
-	private int[] pixels = ((DataBufferInt) image.getRaster().getDataBuffer())
-			.getData();
+	private int[] pixels = ((DataBufferInt) image.getRaster().getDataBuffer()).getData();
+	
+	private SpriteSheet spriteSheet = new SpriteSheet("/sprite_sheet.png");
 
 	public Startup() {
 		setMinimumSize(new Dimension((int)(WIDTH / SCALE), (int)(HEIGHT / SCALE))); // Sets
