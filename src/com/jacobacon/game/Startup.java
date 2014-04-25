@@ -18,6 +18,7 @@ package com.jacobacon.game;
 
 import java.awt.BorderLayout;
 import java.awt.Canvas;
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Toolkit;
@@ -34,7 +35,7 @@ public class Startup extends Canvas implements Runnable {
 	private static final long serialVersionUID = 1L;
 
 	static Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-	public static final int WIDTH = (int) screenSize.getWidth(); 
+	public static final int WIDTH = (int) screenSize.getWidth();
 	public static final int HEIGHT = (int) screenSize.getHeight();
 	public static final double SCALE = 1.75;
 
@@ -45,13 +46,18 @@ public class Startup extends Canvas implements Runnable {
 
 	private BufferedImage image = new BufferedImage(WIDTH, HEIGHT,
 			BufferedImage.TYPE_INT_RGB);
-	private int[] pixels = ((DataBufferInt) image.getRaster().getDataBuffer()).getData();
-	
+	private int[] pixels = ((DataBufferInt) image.getRaster().getDataBuffer())
+			.getData();
+
+	public InputHandler input;
+
 	private SpriteSheet spriteSheet = new SpriteSheet("/sprite_sheet.png");
 
 	public Startup() {
-		setMinimumSize(new Dimension((int)(WIDTH / SCALE), (int)(HEIGHT / SCALE))); // Sets
-		setPreferredSize(new Dimension((int)(WIDTH / SCALE), (int)(HEIGHT / SCALE))); // minimum
+		setMinimumSize(new Dimension((int) (WIDTH / SCALE),
+				(int) (HEIGHT / SCALE))); // Sets
+		setPreferredSize(new Dimension((int) (WIDTH / SCALE),
+				(int) (HEIGHT / SCALE))); // minimum
 		// size.
 
 		frame = new JFrame("Game Alpha 0.0.3"); // Sets name of frame, and
@@ -76,6 +82,19 @@ public class Startup extends Canvas implements Runnable {
 		 * for (int i = 0; i < pixels.length; i++) { pixels[i] = i * tickCount;
 		 * }
 		 */
+
+		if (input.up.isPressed()) {
+			System.out.println("Up");
+		}
+		if (input.down.isPressed()) {
+			System.out.println("Down");
+		}
+		if (input.left.isPressed()) {
+			System.out.println("Left");
+		}
+		if (input.right.isPressed()) {
+			System.out.println("Right");
+		}
 
 	}
 
@@ -105,6 +124,7 @@ public class Startup extends Canvas implements Runnable {
 	public synchronized void start() { // Starts the Game.
 		running = true;
 		new Thread(this).start();
+		input = new InputHandler(this);
 
 	}
 
