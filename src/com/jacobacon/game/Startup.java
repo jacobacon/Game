@@ -28,16 +28,25 @@ import java.awt.image.DataBufferInt;
 
 import javax.swing.JFrame;
 
+import com.jacobacon.game.gfx.Screen;
 import com.jacobacon.game.gfx.SpriteSheet;
 
 public class Startup extends Canvas implements Runnable {
 
 	private static final long serialVersionUID = 1L;
+	
+	/* Broken at the moment
 
 	static Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 	public static final int WIDTH = (int) screenSize.getWidth();
 	public static final int HEIGHT = (int) screenSize.getHeight();
 	public static final double SCALE = 1.75;
+	
+	*/
+	
+	public static final int WIDTH = 160;
+	public static final int HEIGHT = WIDTH / 12 * 9;
+	public static final int SCALE = 6;
 
 	boolean running;
 	private int tickCount = 0;
@@ -51,16 +60,21 @@ public class Startup extends Canvas implements Runnable {
 
 	public InputHandler input;
 
-	private SpriteSheet spriteSheet = new SpriteSheet("/sprite_sheet.png");
+	private Screen screen;
 
 	public Startup() {
+		/* Broken
 		setMinimumSize(new Dimension((int) (WIDTH / SCALE),
 				(int) (HEIGHT / SCALE))); // Sets
 		setPreferredSize(new Dimension((int) (WIDTH / SCALE),
 				(int) (HEIGHT / SCALE))); // minimum
 		// size.
+		 * */
+		 
+		setMinimumSize(new Dimension(WIDTH * SCALE, HEIGHT * SCALE));
+		setPreferredSize(new Dimension(WIDTH * SCALE, HEIGHT * SCALE));
 
-		frame = new JFrame("Game Alpha 0.0.3"); // Sets name of frame, and
+		frame = new JFrame("Game Alpha 0.0.4"); // Sets name of frame, and
 		// initializes it.
 
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -82,20 +96,29 @@ public class Startup extends Canvas implements Runnable {
 		 * for (int i = 0; i < pixels.length; i++) { pixels[i] = i * tickCount;
 		 * }
 		 */
+		
 
 		if (input.up.isPressed()) {
 			System.out.println("Up");
+			screen.yOffset--;
 		}
 		if (input.down.isPressed()) {
 			System.out.println("Down");
+			screen.yOffset++;
 		}
 		if (input.left.isPressed()) {
 			System.out.println("Left");
+			screen.xOffset--;
 		}
 		if (input.right.isPressed()) {
 			System.out.println("Right");
+			screen.xOffset++;
 		}
 
+	}
+	
+	public void init(){
+		screen = new Screen(WIDTH, HEIGHT, new SpriteSheet("/sprite_sheet.png"));
 	}
 
 	private void render() {
@@ -104,6 +127,8 @@ public class Startup extends Canvas implements Runnable {
 			createBufferStrategy(3);
 			return;
 		}
+		
+		screen.render(pixels, 0, WIDTH);
 
 		Graphics g = bs.getDrawGraphics();
 
@@ -144,6 +169,8 @@ public class Startup extends Canvas implements Runnable {
 		long lastTimer = System.currentTimeMillis(); // Get last time in
 														// milliseconds.
 		double delta = 0; // Determine if needs to change.
+		
+		init();
 
 		while (running) { // While the game runs.
 			long now = System.nanoTime(); // Sets to current time.
