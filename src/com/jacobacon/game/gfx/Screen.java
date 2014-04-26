@@ -2,7 +2,7 @@ package com.jacobacon.game.gfx;
 
 public class Screen {
 
-	public static final int MAP_WIDTH = ;
+	public static final int MAP_WIDTH = 64;
 	public static final int MAP_WIDTH_MASK = MAP_WIDTH - 1;
 
 	public int[] tiles = new int[MAP_WIDTH * MAP_WIDTH];
@@ -32,8 +32,8 @@ public class Screen {
 
 	public void render(int[] pixels, int offset, int row) {
 		for (int yTile = yOffset >> 3; yTile <= (yOffset + height) >> 3; yTile++) {
-			int yMin = yTile * 16 - yOffset;
-			int yMax = yMin + 16;
+			int yMin = yTile * 8 - yOffset;
+			int yMax = yMin + 8;
 
 			if (yMin < 0)
 				yMin = 0;
@@ -41,8 +41,8 @@ public class Screen {
 				yMax = height;
 
 			for (int xTile = xOffset >> 3; xTile <= (xOffset + width) >> 3; xTile++) {
-				int xMin = xTile * 16 - xOffset;
-				int xMax = xMin + 16;
+				int xMin = xTile * 8 - xOffset;
+				int xMax = xMin + 8;
 
 				if (xMin < 0)
 					xMin = 0;
@@ -53,7 +53,7 @@ public class Screen {
 						+ (yTile & (MAP_WIDTH_MASK)) * MAP_WIDTH;
 				
 				for(int y = yMin; y< yMax; y++){
-					int sheetPixel = ((y + yOffset) &15) * sheet.width + ((xMin + xOffset) &15);
+					int sheetPixel = ((y + yOffset) &7) * sheet.width + ((xMin + xOffset) &7);
 					int tilePixel = offset + xMin + y * row;
 					for(int x = xMin; x < xMax; x++){
 						int color = tileIndex * 4 + sheet.pixels [sheetPixel++];
