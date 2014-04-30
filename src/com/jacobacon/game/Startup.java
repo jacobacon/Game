@@ -18,10 +18,8 @@ package com.jacobacon.game;
 
 import java.awt.BorderLayout;
 import java.awt.Canvas;
-import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
-import java.awt.Toolkit;
 import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
 import java.awt.image.DataBufferInt;
@@ -30,23 +28,26 @@ import javax.swing.JFrame;
 
 import com.jacobacon.game.gfx.Screen;
 import com.jacobacon.game.gfx.SpriteSheet;
+import com.jacobacon.game.prefs.Prefs;
 
 public class Startup extends Canvas implements Runnable {
 
 	private static final long serialVersionUID = 1L;
-	
-	/* Broken at the moment
 
-	static Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-	public static final int WIDTH = (int) screenSize.getWidth();
-	public static final int HEIGHT = (int) screenSize.getHeight();
-	public static final double SCALE = 1.75;
-	
-	*/
-	
+	/*
+	 * Broken at the moment
+	 * 
+	 * static Dimension screenSize =
+	 * Toolkit.getDefaultToolkit().getScreenSize(); public static final int
+	 * WIDTH = (int) screenSize.getWidth(); public static final int HEIGHT =
+	 * (int) screenSize.getHeight(); public static final double SCALE = 1.75;
+	 */
+
 	public static final int WIDTH = 160;
 	public static final int HEIGHT = WIDTH / 12 * 9;
 	public static final int SCALE = 6;
+	public String name = "Game";
+	public String versionString = "0.0.5";
 
 	boolean running;
 	private int tickCount = 0;
@@ -62,19 +63,20 @@ public class Startup extends Canvas implements Runnable {
 
 	private Screen screen;
 
+	private Prefs prefs = new Prefs(this);
+
 	public Startup() {
-		/* Broken
-		setMinimumSize(new Dimension((int) (WIDTH / SCALE),
-				(int) (HEIGHT / SCALE))); // Sets
-		setPreferredSize(new Dimension((int) (WIDTH / SCALE),
-				(int) (HEIGHT / SCALE))); // minimum
-		// size.
-		 * */
-		 
+		/*
+		 * Broken setMinimumSize(new Dimension((int) (WIDTH / SCALE), (int)
+		 * (HEIGHT / SCALE))); // Sets setPreferredSize(new Dimension((int)
+		 * (WIDTH / SCALE), (int) (HEIGHT / SCALE))); // minimum // size.
+		 */
+
 		setMinimumSize(new Dimension(WIDTH * SCALE, HEIGHT * SCALE));
 		setPreferredSize(new Dimension(WIDTH * SCALE, HEIGHT * SCALE));
 
-		frame = new JFrame("Game Alpha 0.0.4"); // Sets name of frame, and
+		frame = new JFrame(name + " " + versionString); // Sets name of frame,
+														// and
 		// initializes it.
 
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -96,7 +98,6 @@ public class Startup extends Canvas implements Runnable {
 		 * for (int i = 0; i < pixels.length; i++) { pixels[i] = i * tickCount;
 		 * }
 		 */
-		
 
 		if (input.up.isPressed()) {
 			System.out.println("Up");
@@ -116,8 +117,8 @@ public class Startup extends Canvas implements Runnable {
 		}
 
 	}
-	
-	public void init(){
+
+	public void init() {
 		screen = new Screen(WIDTH, HEIGHT, new SpriteSheet("/sprite_sheet.png"));
 	}
 
@@ -127,7 +128,7 @@ public class Startup extends Canvas implements Runnable {
 			createBufferStrategy(3);
 			return;
 		}
-		
+
 		screen.render(pixels, 0, WIDTH);
 
 		Graphics g = bs.getDrawGraphics();
@@ -150,6 +151,7 @@ public class Startup extends Canvas implements Runnable {
 		running = true;
 		new Thread(this).start();
 		input = new InputHandler(this);
+		prefs.loader.test();
 
 	}
 
@@ -169,7 +171,7 @@ public class Startup extends Canvas implements Runnable {
 		long lastTimer = System.currentTimeMillis(); // Get last time in
 														// milliseconds.
 		double delta = 0; // Determine if needs to change.
-		
+
 		init();
 
 		while (running) { // While the game runs.

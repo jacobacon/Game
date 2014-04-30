@@ -5,13 +5,21 @@ import java.awt.event.KeyListener;
 
 public class InputHandler implements KeyListener {
 
-	private final int RIGHTKEY = KeyEvent.VK_D;
-	private final int LEFTKEY = KeyEvent.VK_A;
-	private final int UPKEY = KeyEvent.VK_W;
-	private final int DOWNKEY = KeyEvent.VK_S;
+	private final int RIGHT_LETTER = KeyEvent.VK_D;
+	private final int LEFT_LETTER = KeyEvent.VK_A;
+	private final int UP_LETTER = KeyEvent.VK_W;
+	private final int DOWN_LETTER = KeyEvent.VK_S;
+
+	private final int RIGHT_ARROW = KeyEvent.VK_RIGHT;
+	private final int LEFT_ARROW = KeyEvent.VK_LEFT;
+	private final int UP_ARROW = KeyEvent.VK_UP;
+	private final int DOWN_ARROW = KeyEvent.VK_DOWN;
+
+	boolean focused;
 
 	public InputHandler(Startup game) {
 		game.addKeyListener(this);
+		focused = false;
 	}
 
 	public class Key {
@@ -34,7 +42,6 @@ public class InputHandler implements KeyListener {
 	@Override
 	public void keyPressed(KeyEvent e) {
 		toggle(e.getKeyCode(), true);
-
 	}
 
 	@Override
@@ -51,16 +58,32 @@ public class InputHandler implements KeyListener {
 
 	public void toggle(int keyCode, boolean isPressed) {
 		switch (keyCode) {
-		case UPKEY:
+
+		// WASD
+		case UP_LETTER:
 			up.toggle(isPressed);
 			break;
-		case DOWNKEY:
+		case DOWN_LETTER:
 			down.toggle(isPressed);
 			break;
-		case LEFTKEY:
+		case LEFT_LETTER:
 			left.toggle(isPressed);
 			break;
-		case RIGHTKEY:
+		case RIGHT_LETTER:
+			right.toggle(isPressed);
+			break;
+
+		// Arrow Keys.
+		case UP_ARROW:
+			up.toggle(isPressed);
+			break;
+		case DOWN_ARROW:
+			down.toggle(isPressed);
+			break;
+		case LEFT_ARROW:
+			left.toggle(isPressed);
+			break;
+		case RIGHT_ARROW:
 			right.toggle(isPressed);
 			break;
 
