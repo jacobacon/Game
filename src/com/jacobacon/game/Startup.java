@@ -20,6 +20,7 @@ import java.awt.BorderLayout;
 import java.awt.Canvas;
 import java.awt.Dimension;
 import java.awt.Graphics;
+import java.awt.event.KeyEvent;
 import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
 import java.awt.image.DataBufferInt;
@@ -63,7 +64,7 @@ public class Startup extends Canvas implements Runnable {
 
 	private Screen screen;
 
-	private Prefs prefs = new Prefs(this);
+	public Prefs prefs = new Prefs(this);
 
 	public Startup() {
 		/*
@@ -151,7 +152,8 @@ public class Startup extends Canvas implements Runnable {
 		running = true;
 		new Thread(this).start();
 		input = new InputHandler(this);
-		prefs.loader.test();
+		
+		firstRun();
 
 	}
 
@@ -212,4 +214,9 @@ public class Startup extends Canvas implements Runnable {
 
 	}
 
+	public void firstRun(){
+		//sets Default Prefs.
+		prefs.saver.save("RIGHT", "KeyEvent.VK_D");
+		
+	}
 }

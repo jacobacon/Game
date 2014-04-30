@@ -1,15 +1,22 @@
 package com.jacobacon.game.prefs;
 
+import java.util.prefs.Preferences;
+
 import com.jacobacon.game.Startup;
 
 public class Prefs {
 
+	Preferences userPreferences = Preferences.userRoot();
+	Preferences systemPreferences = Preferences.systemRoot();
+
 	Startup game;
-	public PreferenceLoader loader = new PreferenceLoader();
-	public PreferenceSaver saver = new PreferenceSaver();
+	public static PreferenceLoader loader;
+	public static PreferenceSaver saver;
 
 	public Prefs(Startup game) {
 		this.game = game;
+		loader = new PreferenceLoader();
+		saver = new PreferenceSaver();
 
 	}
 
@@ -18,8 +25,8 @@ public class Prefs {
 
 		}
 
-		public void test() {
-			System.out.println("Load Preferences");
+		public String load(String name) {
+			return userPreferences.get(name, "Doesn't Exist");
 		}
 
 	}
@@ -27,6 +34,10 @@ public class Prefs {
 	public class PreferenceSaver {
 		public PreferenceSaver() {
 
+		}
+		
+		public void save(String name, String value){
+			userPreferences.put(name, value);
 		}
 	}
 

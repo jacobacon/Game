@@ -3,9 +3,11 @@ package com.jacobacon.game;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
+import com.jacobacon.game.prefs.Prefs;
+
 public class InputHandler implements KeyListener {
 
-	private final int RIGHT_LETTER = KeyEvent.VK_D;
+	private final int RIGHT_LETTER = Prefs.loader.load("RIGHT");
 	private final int LEFT_LETTER = KeyEvent.VK_A;
 	private final int UP_LETTER = KeyEvent.VK_W;
 	private final int DOWN_LETTER = KeyEvent.VK_S;
