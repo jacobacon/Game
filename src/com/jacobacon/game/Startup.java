@@ -77,7 +77,7 @@ public class Startup extends Canvas implements Runnable {
 
 		frame = new JFrame(name + " " + versionString); // Sets name of frame,
 														// and
-		// initializes it.
+														// initializes it.
 
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setLayout(new BorderLayout());
