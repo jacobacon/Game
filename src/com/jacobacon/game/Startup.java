@@ -64,7 +64,7 @@ public class Startup extends Canvas implements Runnable {
 
 	private Screen screen;
 
-	public Prefs prefs = new Prefs(this);
+	//public Prefs prefs = new Prefs(this);
 
 	public Startup() {
 		/*
@@ -151,7 +151,7 @@ public class Startup extends Canvas implements Runnable {
 	public synchronized void start() { // Starts the Game.
 		running = true;
 		new Thread(this).start();
-		input = new InputHandler(this);
+		input = new InputHandler(this/*, prefs*/);
 		
 		firstRun();
 
@@ -216,7 +216,7 @@ public class Startup extends Canvas implements Runnable {
 
 	public void firstRun(){
 		//sets Default Prefs.
-		prefs.saver.save("RIGHT", "KeyEvent.VK_D");
+		//prefs.saver.saveInt("RIGHT", KeyEvent.VK_SPACE);
 		
 	}
 }

@@ -7,11 +7,10 @@ import com.jacobacon.game.Startup;
 public class Prefs {
 
 	Preferences userPreferences = Preferences.userRoot();
-	Preferences systemPreferences = Preferences.systemRoot();
 
 	Startup game;
-	public static PreferenceLoader loader;
-	public static PreferenceSaver saver;
+	public PreferenceLoader loader;
+	public PreferenceSaver saver;
 
 	public Prefs(Startup game) {
 		this.game = game;
@@ -25,8 +24,12 @@ public class Prefs {
 
 		}
 
-		public String load(String name) {
+		public String loadString(String name) {
 			return userPreferences.get(name, "Doesn't Exist");
+		}
+		
+		public int loadInt(String name){
+			return userPreferences.getInt(name, 10);
 		}
 
 	}
@@ -36,8 +39,12 @@ public class Prefs {
 
 		}
 		
-		public void save(String name, String value){
+		public void saveString(String name, String value){
 			userPreferences.put(name, value);
+		}
+		
+		public void saveInt(String name, int value){
+			userPreferences.putInt(name, value);
 		}
 	}
 
