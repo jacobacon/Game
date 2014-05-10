@@ -27,8 +27,8 @@ public class Prefs {
 		public String loadString(String name) {
 			return userPreferences.get(name, "Doesn't Exist");
 		}
-		
-		public int loadInt(String name){
+
+		public int loadInt(String name) {
 			return userPreferences.getInt(name, 10);
 		}
 
@@ -38,12 +38,12 @@ public class Prefs {
 		public PreferenceSaver() {
 
 		}
-		
-		public void saveString(String name, String value){
+
+		public void saveString(String name, String value) {
 			userPreferences.put(name, value);
 		}
-		
-		public void saveInt(String name, int value){
+
+		public void saveInt(String name, int value) {
 			userPreferences.putInt(name, value);
 		}
 	}

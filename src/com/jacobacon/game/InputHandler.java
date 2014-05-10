@@ -6,8 +6,8 @@ import java.awt.event.KeyListener;
 //import com.jacobacon.game.prefs.Prefs;
 
 public class InputHandler implements KeyListener {
-	
-	//Prefs pref;
+
+	// Prefs pref;
 
 	private final int RIGHT_LETTER = KeyEvent.VK_D;
 	private final int LEFT_LETTER = KeyEvent.VK_A;
@@ -20,14 +20,12 @@ public class InputHandler implements KeyListener {
 	private final int DOWN_ARROW = KeyEvent.VK_DOWN;
 
 	boolean focused;
-	
-	
 
-	public InputHandler(Startup game /*, Prefs pref*/) {
-		
+	public InputHandler(Startup game /* , Prefs pref */) {
+
 		game.addKeyListener(this);
 		focused = false;
-		//this.pref = pref;
+		// this.pref = pref;
 	}
 
 	public class Key {
@@ -65,22 +63,16 @@ public class InputHandler implements KeyListener {
 	}
 
 	public void toggle(int keyCode, boolean isPressed) {
-		
-		if(keyCode == UP_LETTER){
+
+		if (keyCode == UP_LETTER) {
 			up.toggle(isPressed);
+		} else if (keyCode == DOWN_LETTER) {
+			down.toggle(isPressed);
+		} else if (keyCode == LEFT_LETTER) {
+			left.toggle(isPressed);
+		} else if (keyCode == RIGHT_LETTER) {
+			right.toggle(isPressed);
 		}
-		else
-			if(keyCode == DOWN_LETTER){
-				down.toggle(isPressed);
-			}
-			else
-				if(keyCode == LEFT_LETTER){
-					left.toggle(isPressed);
-				}
-				else
-					if(keyCode == RIGHT_LETTER){
-						right.toggle(isPressed);
-					}
 		switch (keyCode) {
 
 		// Arrow Keys.

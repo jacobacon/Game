@@ -20,7 +20,6 @@ import java.awt.BorderLayout;
 import java.awt.Canvas;
 import java.awt.Dimension;
 import java.awt.Graphics;
-import java.awt.event.KeyEvent;
 import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
 import java.awt.image.DataBufferInt;
@@ -29,7 +28,6 @@ import javax.swing.JFrame;
 
 import com.jacobacon.game.gfx.Screen;
 import com.jacobacon.game.gfx.SpriteSheet;
-import com.jacobacon.game.prefs.Prefs;
 
 public class Startup extends Canvas implements Runnable {
 
@@ -59,12 +57,13 @@ public class Startup extends Canvas implements Runnable {
 			BufferedImage.TYPE_INT_RGB);
 	private int[] pixels = ((DataBufferInt) image.getRaster().getDataBuffer())
 			.getData();
+	private int[] colors = new int[6 * 6 * 6];
 
 	public InputHandler input;
 
 	private Screen screen;
 
-	//public Prefs prefs = new Prefs(this);
+	// public Prefs prefs = new Prefs(this);
 
 	public Startup() {
 		/*
@@ -120,6 +119,14 @@ public class Startup extends Canvas implements Runnable {
 	}
 
 	public void init() {
+
+		for (int r = 0; r < 6; r++) {
+			for (int g = 0; g < 6; g++) {
+				for (int b = 0; b < 6; b++) {
+					int rr = (r * 255 / 5);
+				}
+			}
+		}
 		screen = new Screen(WIDTH, HEIGHT, new SpriteSheet("/sprite_sheet.png"));
 	}
 
@@ -151,8 +158,8 @@ public class Startup extends Canvas implements Runnable {
 	public synchronized void start() { // Starts the Game.
 		running = true;
 		new Thread(this).start();
-		input = new InputHandler(this/*, prefs*/);
-		
+		input = new InputHandler(this/* , prefs */);
+
 		firstRun();
 
 	}
@@ -214,9 +221,9 @@ public class Startup extends Canvas implements Runnable {
 
 	}
 
-	public void firstRun(){
-		//sets Default Prefs.
-		//prefs.saver.saveInt("RIGHT", KeyEvent.VK_SPACE);
-		
+	public void firstRun() {
+		// sets Default Prefs.
+		// prefs.saver.saveInt("RIGHT", KeyEvent.VK_SPACE);
+
 	}
 }
