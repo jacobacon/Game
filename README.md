@@ -1,3 +1,3 @@
-A Game that will implement the evolution of a character from cell, to civilization, to space exploration. No real details as of yet.
+This game is going to be a turn based strategy game that involves zombies. Not sure what else yet. 
 
 Name under works.
