@@ -22,8 +22,8 @@ public class Screen {
 		this.sheet = sheet;
 
 		for (int i = 0; i < MAP_WIDTH * MAP_WIDTH; i++) {
-			colors[i * 4 + 0] = 0xff00ff;   
-			colors[i * 4 + 1] = 0x00ffff;  //Set colors
+			colors[i * 4 + 0] = 0xff00ff;
+			colors[i * 4 + 1] = 0x00ffff; // Set colors
 			colors[i * 4 + 2] = 0xffff00;
 			colors[i * 4 + 3] = 0xffffff;
 		}
@@ -51,15 +51,16 @@ public class Screen {
 
 				int tileIndex = (xTile & (MAP_WIDTH_MASK))
 						+ (yTile & (MAP_WIDTH_MASK)) * MAP_WIDTH;
-				
-				for(int y = yMin; y< yMax; y++){
-					int sheetPixel = ((y + yOffset) &7) * sheet.width + ((xMin + xOffset) &7);
+
+				for (int y = yMin; y < yMax; y++) {
+					int sheetPixel = ((y + yOffset) & 7) * sheet.width
+							+ ((xMin + xOffset) & 7);
 					int tilePixel = offset + xMin + y * row;
-					for(int x = xMin; x < xMax; x++){
-						int color = tileIndex * 4 + sheet.pixels [sheetPixel++];
+					for (int x = xMin; x < xMax; x++) {
+						int color = tileIndex * 4 + sheet.pixels[sheetPixel++];
 						pixels[tilePixel++] = colors[color];
 					}
-					
+
 				}
 
 			}
