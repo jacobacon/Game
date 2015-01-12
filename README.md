@@ -1,3 +1,3 @@
-This game is going to be a turn based strategy game that involves zombies. Not sure what else yet. 
+So I decided to make this a survival game that involves random "battles" (Like Pokemon), randomly generated worlds, and lots of monsters.
 
-Name under works.
+Still don't have a name for it.
